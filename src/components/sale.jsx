@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaFilter, FaChevronDown } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 
 const products =[
    {
@@ -11,6 +11,7 @@ const products =[
      originalPrice:"Rs/-4000",
      discountedPrice:"Rs/-3500",
      discount:"30%",
+     category:"Bags",
    },
    {
     id:2,
@@ -20,6 +21,7 @@ const products =[
     originalPrice:"Rs/-2000",
     discountedPrice:"Rs/-1500",
     discount:"30%",
+    category:"Bags",
   },
   {
     id:3,
@@ -29,6 +31,7 @@ const products =[
     originalPrice:"Rs/-10,000",
     discountedPrice:"Rs/-8500",
     discount:"30%",
+    category:"Clothing",
   },
   {
     id:4,
@@ -38,6 +41,7 @@ const products =[
     originalPrice:"Rs/-8,000",
     discountedPrice:"Rs/-6500",
     discount:"30%",
+    category:"Shoes",
   },
   {
     id:5,
@@ -47,6 +51,7 @@ const products =[
     originalPrice:"Rs/-3500",
     discountedPrice:"Rs/-3000",
     discount:"30%",
+    category:"Shoes",
   },
   {
    id:6,
@@ -56,6 +61,7 @@ const products =[
    originalPrice:"Rs/-1500",
    discountedPrice:"Rs/-1000",
    discount:"30%",
+   category:"Jewellery",
  },
  {
    id:7,
@@ -65,6 +71,7 @@ const products =[
    originalPrice:"Rs/-3000",
    discountedPrice:"Rs/-2500",
    discount:"30%",
+   category:"Acessories",
  },
  {
    id:8,
@@ -74,11 +81,19 @@ const products =[
    originalPrice:"Rs/-1000",
    discountedPrice:"Rs/-700",
    discount:"30%",
+   category:"Jewellery",
  },
 ];
 
+const filters=["AllFilters","Clothing","Bags","Shoes","Acessories","Jewellery"];
+
 
 export default function GallantSale () {
+
+     const [selectedFilter,setSelectedFilter]=useState("AllFilters");
+     const filteredProducts = selectedFilter === "AllFilters"
+     ? [...products]
+     : products.filter((product)=> product.category === selectedFilter);
 
   return (
     <div className="max-w-full p-2 mx-auto text-left">
@@ -99,7 +114,10 @@ export default function GallantSale () {
             
              <div className="flex flex-wrap gap-3">
                  
-                 <button className="flex items-center px-4 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-200 transition">
+                 <button className="flex items-center px-4 py-2 border border-gray-300 rounded-full text-gray-700
+                  hover:bg-gray-200 transition"
+                  onClick={()=>setSelectedFilter("AllFilters")}
+                  >
                    <FaFilter className="w-4 h-4 mr-2"/>
                    All Filters
                  </button>
@@ -107,13 +125,14 @@ export default function GallantSale () {
                     "Clothing",
                     "Bags",
                     "Shoes",
-                    "Accessories",
+                    "Acessories",
                     "Jewellery",
                  ].map((filter,index)=>(
                  <button 
                  key={index}
                  className="px-4 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-200"
-                 >
+                  onClick={()=>setSelectedFilter(filter)}
+               >
                     {filter}
                  </button>
                 )
@@ -126,41 +145,49 @@ export default function GallantSale () {
                 Sort By  <FaChevronDown className="w-5 h-5 ml-1"/>
              </button>
         </div>
-             
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 justify-start w-full">
-              {products.map((product)=>(
+          {filteredProducts.length === 0 ?(
+             <div className="items-center text-gray-500 text-lg py-16">
+              There is not any filtered Product.
+              </div>
+
+          ):(
+           <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 justify-start w-full">
+                 {filteredProducts.map((product)=>(
+                   <Link to={`/product/${product.id}`} key={product.id}>
                   <div
                    key={product.id}
                    className="relative bg-white rounded-lg p-4 text-left"
                   >
-
                     <div className="w-full flex items-center justify-center h-[250px]">
                        <img
                         src={product.image} 
                         className="w-full h-full object-contain"
                        />
                       </div>
-                    
-                    <div className="mt-4 text-left">
+
+                      <div className="mt-4 text-left">
                     <p className="text-gray-500 text-sm">{product.brand}</p>
                       <p className="text-gray-500 text-sm">{product.name}</p>
                       </div>
-
+                   {/*Pricing */}
                     <div className="flex items-center space-x-2 mt-1">
                       <span className="text-gray-400 line-through text-sm">{product.originalPrice}</span>
                       <span className="text-red-600 font-semibold">{product.discountedPrice}</span>
                     </div>
-                    
+                      {/* Discount */}
                     <span className="text-xs rounded-lg bg-red-500 text-white px-2 py-1 mt-1 inline-block">
                       {product.discount}
                     </span>
-                    </div>
-               
-
-              ))
-
-              }
-            </div>
+                  </div>
+                  </Link>
+                  ))}
+                  </div>
+                  </>
+          )}
+            
+            {/*Recommendations*/}
+            
           <div className="mt-12">
              <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-semibold text-gray-800">Recommendations</h2>
