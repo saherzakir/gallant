@@ -1,8 +1,11 @@
 import React ,{useState,useEffect}from 'react';
 import { FaUser ,FaHeart , FaShoppingBag ,FaBars,FaTimes,FaSearch } from "react-icons/fa";
 import Sidebar from "./sidebar";
+import { useNavigate } from 'react-router-dom';
 
 const header = () => {
+       const navigate=useNavigate();
+
   const [sidebaropen ,setSidebarOpen]=useState(false);
 
       useEffect(()=>{
@@ -20,14 +23,14 @@ const header = () => {
 
   return (
           <header className="w-full border-b border-gray-200">
-
+             {/**Top Bar */}
             <div className="bg-black text-white text-center text-sm py-2 px-4">
               
               <a href='#' className="underline hover:text-gray-300">
                  We have a 50% off on every item.    
               </a>
             </div>
-          
+           {/**Main Navigation */}
           <div className="flex items-center justify-between px-4 md:px-8 py-4 bd-white relative">
               <div className="hidden md:flex space-x-6 text-sm flex-1 justify-start" >
                    <a href='#' className="font-semibold text-black hover:text-gray-600">Home</a>
@@ -41,8 +44,11 @@ const header = () => {
             <div className="flex items-center space-x-6 text-xl text-black flex-1 justify-end">
                  <FaUser className="hover:text-gray-600 cursor-pointer hidden md:block" />
                   <FaHeart className="hover:text-gray-600 cursor-pointer hidden md:block"/>
-                   <FaShoppingBag  className="hover:text-gray-600 cursor-pointer hidden md:block"/>
-               
+                   <FaShoppingBag  
+                    onClick={()=>navigate("/basket")}
+                   className="hover:text-gray-600 cursor-pointer hidden md:block"
+                   />
+                
                 <button className="flex md:hidden text-2xl text-black focus:outline-none"
                  onClick={()=>setSidebarOpen(true)}
                 >

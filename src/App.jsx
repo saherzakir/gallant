@@ -5,6 +5,7 @@ import Footer from "./components/footer";
 import WomenSale from "./components/sale";
 import BestDressed from "./components/bestDressed";
 import Productpage from "./pages/productdetail";
+import Basket from "./pages/basket";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                 </>
               } />
               <Route path="/product/:id" element={<Productpage/>} />
+              <Route path="/basket" element={<Basket/>} />
           </Routes>
         </main>
         <Footer />
