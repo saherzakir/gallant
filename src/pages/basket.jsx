@@ -1,8 +1,9 @@
 import React from "react";
 import {FaHeart,FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Basket =()=>{
-
+     const navigate=useNavigate();
     return(
         <div className="w-full bg-white text-black px-4 sm:px-6 md:px-10 lg:px-20 py-8">
             <h2 className="text-xl sm:text-2xl font-semibold mb-6 sm:mb-8">Shopping Bag</h2>
@@ -64,11 +65,52 @@ const Basket =()=>{
          {/**Summary Section*/}
          <div className="bg-white border border-gray-200 p-6 w-full h-fit top-6 sticky">
             <h3 className="text-lg font-semibold mb-4">Summary</h3>
+
+      <div className="text-sm space-y-3">
+          <div className="flex justify-between">
+             <span>SubTotal</span>
+             <span>Rs/-420</span>
+           </div>
+          <div className="flex justify-between">
+            <span>Delivery</span>
+            <span>Rs/-250</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Sale</span>
+            <span className="text-red-600">Rs/. -150</span>
+          </div>
+         <hr  />
+        <div className="flex justify-between font-semibold">
+        <span>Total</span>
+        <span>Rs/-520</span>
+        </div>
+      <button className="mt-4 py-2 w-full bg-black  text-white rounded hover:bg-gray-900 transition-colors"
+        onClick={()=>navigate("/checkout")}
+      >
+           Go To Checkout
+      </button>
+        </div>
          </div>
-        </div>
-        </div>
+         </div>
+{/**Bottom info */}
+     <div className="mt-10 border-t pt-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-sm text-gray-600">
+       <div>
+        <div className="font-medium mb-1"> Returns</div>
+        <p>Free Returns Service</p>
+          </div>
 
+          <div>
+            <div className="font-medium mb-1">Order Info</div>
+          <p>New order take you one step closer to unlock rewards</p>
+          </div>
+          <div>
+            <div className="font-medium mb-1">Fast Delivery</div>
+          <p>To your door in no time.</p>
+          </div>
 
-    )
-}
+       </div>
+     </div>    
+    );
+};
+
 export default Basket;

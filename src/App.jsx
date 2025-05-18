@@ -6,6 +6,7 @@ import WomenSale from "./components/sale";
 import BestDressed from "./components/bestDressed";
 import Productpage from "./pages/productdetail";
 import Basket from "./pages/basket";
+import Checkout from "./pages/checkout";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               } />
               <Route path="/product/:id" element={<Productpage/>} />
               <Route path="/basket" element={<Basket/>} />
+              <Route path="/checkout" element={<Checkout/>} />
           </Routes>
         </main>
         <Footer />

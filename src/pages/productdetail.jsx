@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const products =[
   {
@@ -84,6 +85,8 @@ const products =[
 ];
 
 const Productpage = () => {
+    
+
   const imagesList = [
     "/images/bag2.jpg",
     "/images/bag2.jpg",
@@ -136,7 +139,8 @@ const Productpage = () => {
             </span>
           </div>
           <div className="flex space-x-4">
-            <button className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition">
+            <button className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
+            >
               Add To Bag
             </button>
             <button className="border border-gray-300 px-6 py-2 rounded hover:bg-gray-100 flex text-center">
@@ -167,6 +171,15 @@ const Productpage = () => {
           </ul>
          </div>
          </div>
+             
+             <div className="space-y-6">
+               <div>
+                <p className="font-semibold">Gallant Article</p>
+                <p>234567890909</p>
+               </div>
+              </div>
+
+
          {/*Product Image */}
          <div className="space-y-6">
            <div>
@@ -190,6 +203,8 @@ const Productpage = () => {
                 <h2 className="text-2xl font-semibold text-gray-800">Recommendations</h2>
                 <button className="px-5 py-2 text-sm border border-gray-400 rounded-full hover:bg-gray-200 hover:text-black">Shop Now</button>
               </div>
+
+              {/**Products */}
           <div className="relative flex justify-center mt-8">
              <div className="flex gap-6 w-max px-1 custom-scrollbar"
                style={{
@@ -242,3 +257,4 @@ const Productpage = () => {
   );
 };
 export default Productpage;
+ 
