@@ -2,11 +2,14 @@ import React ,{useState,useEffect}from 'react';
 import { FaUser ,FaHeart , FaShoppingBag ,FaBars,FaTimes,FaSearch } from "react-icons/fa";
 import Sidebar from "./sidebar";
 import { useNavigate } from 'react-router-dom';
+import UserModal from './userModal';
+
 
 const header = () => {
        const navigate=useNavigate();
 
   const [sidebaropen ,setSidebarOpen]=useState(false);
+  const [modal,setModal]=useState(false);
 
       useEffect(()=>{
         const handleResize =()=>{
@@ -42,7 +45,9 @@ const header = () => {
           <h1 className="text-2xl mb:text-3xl font-bold text-center">GALLANT</h1>
           </div>
             <div className="flex items-center space-x-6 text-xl text-black flex-1 justify-end">
-                 <FaUser className="hover:text-gray-600 cursor-pointer hidden md:block" />
+                 <FaUser className="hover:text-gray-600 cursor-pointer hidden md:block" 
+                  onClick={()=> setModal(true)}
+                 />
                   <FaHeart className="hover:text-gray-600 cursor-pointer hidden md:block"/>
                    <FaShoppingBag  
                     onClick={()=>navigate("/basket")}
@@ -86,7 +91,9 @@ const header = () => {
                isOpen={sidebaropen}
                onClose={()=>setSidebarOpen(false)}
                />
-    
+               <UserModal isOpen={modal} 
+               onClose={()=>setModal(false)}
+                />
                 
           </header>
     

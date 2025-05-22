@@ -7,6 +7,7 @@ import BestDressed from "./components/bestDressed";
 import Productpage from "./pages/productdetail";
 import Basket from "./pages/basket";
 import Checkout from "./pages/checkout";
+import userModal from "./components/userModal";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/product/:id" element={<Productpage/>} />
               <Route path="/basket" element={<Basket/>} />
               <Route path="/checkout" element={<Checkout/>} />
+                  <Route path="/userModal" element={<userModal/>} />
           </Routes>
         </main>
         <Footer />
